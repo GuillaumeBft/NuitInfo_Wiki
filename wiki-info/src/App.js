@@ -2,6 +2,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Navigate, Route, Routes } from "react-router-dom";
 import './App.css';
 import Authentification from './Components/Authentification';
+import TrashGame from './Components/TrashGame/TrashGame';
 import store from './Store/Store';
 
 function RequireAuth({ children }) {
@@ -25,7 +26,7 @@ const App = () => {
         <Routes>
           <Route path={"/login"} element={<Authentification />} />
           <Route path={"/"} element={<Authentification />} /*TODO find a way to multiple path to go on the same element*/ />
-          <Route path='/trashgame' element={<p> TrashGame </p>} />
+          <Route path='/trashgame' element={<TrashGame />} />
           {/*<Route path='/projects/:id' element={<RequireAuth> <ProjectInterface /></RequireAuth>} /> */}
         </Routes>
       </div>
