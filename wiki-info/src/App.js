@@ -1,14 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
+import { Provider } from 'react-redux';
+import { BrowserRouter as Router, Navigate, Route, Routes } from "react-router-dom";
 import './App.css';
 import Authentification from './Components/Authentification';
+import store from './Store/Store';
 
-function App() {
+function RequireAuth({ children }) {
+  const auth = store.getState().user !== undefined;
+  if (!auth) {
+    // Redirect them to the /login page, but save the current location they were
+    // trying to go to when they were redirected. This allows us to send them
+    // along to that page after they login, which is a nicer user experience
+    // than dropping them off on the home page.
+    return <Navigate to="/login" />;
+  }
+
+  return children;
+}
+
+const App = () => {
+
   return (
-    <div className="App">
-      <Authentification />
-    </div>
-  );
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path={"/login"} element={<Authentification />} />
+          <Route path={"/"} element={<Authentification />} /*TODO find a way to multiple path to go on the same element*/ />
+          <Route path='/trashgame' element={<p> TrashGame </p>} />
+          {/*<Route path='/projects/:id' element={<RequireAuth> <ProjectInterface /></RequireAuth>} /> */}
+        </Routes>
+      </div>
+    </Router>
+  )
 }
 
 export default App;
