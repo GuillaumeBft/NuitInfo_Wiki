@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import '../../ComponentStyles/TrashGame.css';
-import 'Canvas.js';
 
 class TrashGame extends React.Component {
     render() {
