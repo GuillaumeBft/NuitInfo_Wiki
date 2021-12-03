@@ -2,11 +2,11 @@
 GET http://localhost:3000/user_api/
 
 ### Get user by id
-GET http://localhost:3000/user_api/user/1/
+GET http://localhost:3000/user_api/user/2/
 
 
 ### Get Users by login and password
-GET http://localhost:3000/user_api/users?login=Eliot&password=BgTimide&apiKey=4BD39FF27B8B6C9433C8EBB4F455C
+GET http://localhost:3000/user_api/users?login=a&password=ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9
 
 ### Get Users from API
 GET http://localhost:3000/user_api/users
@@ -17,19 +17,21 @@ content-type: application/json
 
 {
     "login": "sample",
-    "password": "test"
+    "password": "tetst",
+    "right": "USER"
 }
 
 ### Delete user with ID 4
-DELETE http://localhost:3000/user_api/user/4
+DELETE http://localhost:3000/user_api/user/2
 
 
 ### Update user with ID 4
-PATCH  http://localhost:3000/user_api/user/1
+PATCH  http://localhost:3000/user_api/user/2
 content-type: application/json
 
 {
     "login": "Eliot",
-    "password": "BgTimide"
+    "password": "BgTimide",
+    "right": "USER"
 }
 

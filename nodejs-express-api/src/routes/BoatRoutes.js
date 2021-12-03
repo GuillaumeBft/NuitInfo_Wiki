@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { invalidApiKeyResponse } = require('../config/Response');
 const { checkApiKey } = require('../config/Security');
-const { getAllUsers, getUserById, getUsersByLogin, addUser, deleteUser, updateUser } = require('../controllers/UserController');
+const { getAllBoats, getBoatById, getBoatsByLogin, addBoat, deleteBoat, updateBoat } = require('../controllers/BoatController');
 
 
 router.use(function (req, res, next) {
@@ -19,17 +19,9 @@ router.use(function (req, res, next) {
 //                          GET ROUTES
 //##########################################################################
 
-router.route('/users').get(async (req, res) => {
-    const login = req.query.login;
-    const password = req.query.password;
+router.route('/boats').get(async (req, res) => {
 
-    let response;
-    if (login !== undefined && password !== undefined) {
-        response = await getUsersByLogin(login, password);
-    }
-    else {
-        response = await getAllUsers();
-    }
+    let response = await getAllBoats();
 
     if (response.success === true) {
         res.status(200).json(response);
@@ -38,10 +30,10 @@ router.route('/users').get(async (req, res) => {
     }
 });
 
-router.route('/user/:id').get(async (req, res) => {
+router.route('/boat/:id').get(async (req, res) => {
     const id = req.params.id;
 
-    let response = await getUserById(id);
+    let response = await getBoatById(id);
     if (response.success === true) {
         res.status(200).json(response);
     } else {
@@ -54,12 +46,11 @@ router.route('/user/:id').get(async (req, res) => {
 //                          POST ROUTES
 //##########################################################################
 
-router.route('/users').post(async (req, res) => {
-    const login = req.body.login;
-    const password = req.body.password;
-    const right = req.body.right;
+router.route('/Boats').post(async (req, res) => {
+    const name = req.body.name;
+    const type = req.body.type;
 
-    let response = await addUser(login, password, right);
+    let response = await addBoat(name, type);
     if (response.success === true) {
         res.status(200).json(response);
     } else {
@@ -72,13 +63,12 @@ router.route('/users').post(async (req, res) => {
 //                          PATCH ROUTES
 //##########################################################################
 
-router.route('/user/:id').patch(async (req, res) => {
+router.route('/Boat/:id').patch(async (req, res) => {
     const id = req.params.id;
-    const login = req.body.login;
-    const password = req.body.password;
-    const right = req.body.right;
+    const name = req.body.name;
+    const type = req.body.type;
 
-    let response = await updateUser(id, login, password, right);
+    let response = await updateBoat(id, name, type);
     if (response.success === true) {
         res.status(200).json(response);
     } else {
@@ -91,10 +81,10 @@ router.route('/user/:id').patch(async (req, res) => {
 //                          DELETE ROUTES
 //##########################################################################
 
-router.route('/user/:id').delete(async (req, res) => {
+router.route('/Boat/:id').delete(async (req, res) => {
     const id = req.params.id;
 
-    let response = await deleteUser(id);
+    let response = await deleteBoat(id);
     if (response.success === true) {
         res.status(200).json(response);
     } else {

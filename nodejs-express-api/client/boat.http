@@ -1,0 +1,31 @@
+### Default boat API URL
+GET http://localhost:3000/boat_api/
+
+### Get boat by id
+GET http://localhost:3000/boat_api/boat/2/
+
+### Get boats from API
+GET http://localhost:3000/boat_api/boats
+
+### Post a new boat
+POST http://localhost:3000/boat_api/boats/
+content-type: application/json
+
+{
+    "name": "sample",
+    "type": "tetst"
+}
+
+### Delete boat with ID 4
+DELETE http://localhost:3000/boat_api/boat/2
+
+
+### Update boat with ID 4
+PATCH  http://localhost:3000/boat_api/boat/1
+content-type: application/json
+
+{ 
+    "name": "boat2000",
+    "type": "tetst"
+}
+

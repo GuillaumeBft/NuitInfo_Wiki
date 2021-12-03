@@ -6,6 +6,7 @@ const cors = require('cors');
 
 //Routes
 const user_routes = require("../routes/UserRoutes");
+const boat_routes = require("../routes/BoatRoutes");
 
 //Default responses
 const { pageNotFoundResponse } = require("./Response");
@@ -25,6 +26,7 @@ app.get('/', function (req, res) {
 });
 
 app.use('/user_api', user_routes);
+app.use('/boat_api', boat_routes);
 
 app.use(function (req, res, next) {
     res.status(404).json(pageNotFoundResponse());

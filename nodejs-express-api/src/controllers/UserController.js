@@ -1,4 +1,3 @@
-const User = require('../models/UserModel');
 const { errorResponse } = require('../config/Response');
 const { sendQueryToDatabase } = require('../config/Database');
 
@@ -6,7 +5,7 @@ const userTable = "user";
 
 
 // Get all users
-module.exports.getAllUsers = async function() {
+module.exports.getAllUsers = async function () {
     try {
         const sql = "SELECT * FROM " + userTable;
         const result = await sendQueryToDatabase(sql);
@@ -21,7 +20,7 @@ module.exports.getAllUsers = async function() {
 }
 
 //Get user by its ID
-module.exports.getUserById = async function(id) {
+module.exports.getUserById = async function (id) {
     try {
         const sql = "SELECT * FROM " + userTable + " WHERE id=" + id;
         const result = await sendQueryToDatabase(sql);
@@ -36,7 +35,7 @@ module.exports.getUserById = async function(id) {
 }
 
 //Get user by its logins
-module.exports.getUsersByLogin = async function(login, password) {
+module.exports.getUsersByLogin = async function (login, password) {
     try {
         const sql = "SELECT * FROM " + userTable + " WHERE login=\'" + login + "\' AND password=\'" + password + '\'';
         const result = await sendQueryToDatabase(sql);
@@ -51,9 +50,9 @@ module.exports.getUsersByLogin = async function(login, password) {
 }
 
 //Post user
-module.exports.addUser = async function (login, password) {
+module.exports.addUser = async function (login, password, right) {
     try {
-        const sql = 'INSERT INTO ' + userTable + ' VALUES (NULL,\'' + login + '\',\'' + password + '\');';
+        const sql = 'INSERT INTO ' + userTable + ' VALUES (NULL,\'' + login + '\',\'' + password + '\',\'' + right + '\'); ';
         const result = await sendQueryToDatabase(sql);
         return {
             success: true,
@@ -66,9 +65,9 @@ module.exports.addUser = async function (login, password) {
 }
 
 // Update user
-module.exports.updateUser = async function (id, login, password) {
+module.exports.updateUser = async function (id, login, password, right) {
     try {
-        const sql = 'UPDATE ' + userTable + ' SET login =\'' + login + '\', password =\'' + password + '\' WHERE id = ' + id + '';
+        const sql = 'UPDATE ' + userTable + ' SET login =\'' + login + '\', password =\'' + password + '\', user.right=\'' + right + '\' WHERE id = ' + id + '';
         const result = await sendQueryToDatabase(sql);
         return {
             success: true,
