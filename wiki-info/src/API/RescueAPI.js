@@ -13,4 +13,15 @@ export default class RescueApi {
             return console.error(error);
         }
     }
+
+    static async getPersonOfRescue(id) {
+        const url = RESCUE_URL + "?id=" + id;
+        console.log(url);
+        try {
+            const response = await fetch(url);
+            return await response.json();
+        } catch (error) {
+            return console.error(error);
+        }
+    }
 }
